@@ -56,3 +56,13 @@ We create page objects for the following pages:
 - It initializes the WebDriver instance and the web elements on the page using Selenium's PageFactory.
 - We have achieved reusability of code by creating a BasePage class.
 - Initialize web elements defined in the child classes using PageFactory
+
+------------------------
+
+### Version 0.0.5
+- Modified TC_001_AccountRegistrationTest to use the BasePage class.
+- Added a method to generate random string in BasePage.
+- Added a method to generate random alphaNumeric string as email in BasePage.
+- Ran the test case and verified the account registration functionality.
+
+------------------------
