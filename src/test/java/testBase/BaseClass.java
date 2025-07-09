@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.Duration;
 
@@ -16,6 +18,7 @@ import java.time.Duration;
 public class BaseClass {
     // WebDriver instance for browser interaction
     public WebDriver driver;
+    public Logger logger;
 
     /**
      * Setup method to initialize the WebDriver and configure browser settings.
@@ -23,6 +26,7 @@ public class BaseClass {
      */
     @BeforeClass
     public void setup() {
+        logger = LogManager.getLogger(this.getClass());
         driver = new ChromeDriver(); // Initialize ChromeDriver
         driver.manage().deleteAllCookies(); // Clear browser cookies
         driver.manage().window().maximize(); // Maximize browser window
