@@ -66,3 +66,38 @@ We create page objects for the following pages:
 - Ran the test case and verified the account registration functionality.
 
 ------------------------
+
+### Version 0.0.6
+- Adding logging functionality to the framework.
+
+Logging - record all the events in the form of text.
+Log Levels (6) - ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+
+Appenders - appenders are responsible for writing the log messages to a specific destination (Console / File).
+Loggers - loggers are responsible for logging the messages.
+
+Add log4j2.xml file to the src/test/resources folder - it is a configuration file.
+Start by adding the log4j2 dependency in pom.xml file.
+- log4j-core
+- log4j-api
+
+Update BaseClass file to include logging functionality.
+The configuration should be done in the setup method of BaseClass.
+
+
+```java
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class BaseClass {
+    public WebDriver driver;
+    public Logger logger;
+    
+    @BeforeClass
+    public void setup() {
+        logger = LogManager.getLogger(this.getClass());
+        driver = new ChromeDriver(); // Initialize ChromeDriver
+        driver.get("http://localhost/opencart/upload/index.php"); // Navigate to the application URL
+    }
+}
+```
