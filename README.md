@@ -101,3 +101,61 @@ public class BaseClass {
     }
 }
 ```
+
+---------------------------
+
+### Version 0.0.7
+
+Running Test Cases on different browsers
+- create a xml file by right clicking on the testCases package and selecting Create TestNG XML.
+- Add the following code to the xml file passing parameters for browser and os.
+- Save this file as "master.xml" in the testCases package.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="3" name="Test">
+    <parameter name="os" value="mac" />
+    <parameter name="browser" value="chrome" />
+    <classes>
+      <class name="testCases.TC001_AccountRegistrationTest"/>
+    </classes>
+  </test>
+</suite>
+
+```
+- Update the BaseClass setup method to read the parameters from the xml file.
+  - add @Parameters annotation to the setup method => @Parameters({"os", "browser"})
+  - update the setup method to accept 2 parameters os and browser => public void setup(String os, String browser)
+```java
+@BeforeClass
+@Parameters({"os", "browser"})
+public void setup(String os, String br) {
+
+  logger = LogManager.getLogger(this.getClass());
+
+  switch (br) {
+    case "chrome":
+      driver = new ChromeDriver();
+      break;
+    case "firefox":
+      driver = new FirefoxDriver();
+      break;
+    case "edge":
+      driver = new EdgeDriver();
+      break;
+    default:
+      System.out.println("Browser not supported: " + br);
+      return;
+  }
+
+  driver.manage().deleteAllCookies();
+  driver.manage().window().maximize();
+  driver.get("http://localhost/opencart/upload/index.php");
+  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+}
+```
+
+- we should now run the test case using only the master.xml file.
+
