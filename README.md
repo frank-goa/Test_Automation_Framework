@@ -1,32 +1,36 @@
-# Test Automation Framework
 
-___
-___
+# Test Automation Framework
+<hr style="border:1px dotted red;">
+<hr style="border:1px dotted red;">
+
 
 - #### This is a test automation framework designed to facilitate the testing of web applications***OpenCart
-  ***. It provides a structured approach to writing and executing tests, making it easier to maintain and scale your test suite.
+- #### It provides a structured approach to writing and executing tests, making it easier to maintain and scale your test suite.
 - #### Based on the Page Object Model (POM) design pattern, this framework allows for better organization of test code and promotes reusability of page elements and actions.
 - #### Uses: Java, Selenium, TestNG, Maven and Extent Reports.
 - #### This project required OpenCart running on localhost using XAMPP or any other server.
 
 <img src="img.png" alt="Folder Structure" width="800"/>
 
-___
-___
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.1
 
 - A blank Java project with the necessary dependencies for Selenium and TestNG.
 
-___
-___
+<br>
+<br>
+
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.2
 
 - Update pom.xml to include the dependencies.
 
-___
-___
+<br>
+<br>
+
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.3
 
@@ -43,9 +47,11 @@ ___
 
 <img src="folderstructure.jpg" alt="Folder Structure" width="400"/>
 
-___
-___
 
+<br>
+<br>
+
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.4
 
@@ -63,9 +69,10 @@ We create page objects for the following pages:
 - We have achieved reusability of code by creating a BasePage class.
 - Initialize web elements defined in the child classes using PageFactory
 
-___
-___
+<br>
+<br>
 
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.5
 - Modified TC_001_AccountRegistrationTest to use the BasePage class.
@@ -73,9 +80,10 @@ ___
 - Added a method to generate random alphaNumeric string as email in BasePage.
 - Ran the test case and verified the account registration functionality.
 
-___
-___
+<br>
+<br>
 
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.6
 - Adding logging functionality to the framework.
@@ -112,8 +120,10 @@ public class BaseClass {
 }
 ```
 
-___
+<br>
+<br>
 
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.7
 
@@ -174,9 +184,10 @@ public void setup(String os, String br) {
 - we should now run the test case using only the master.xml file.
 
 
-___
-___
+_<br>
+<br>
 
+<hr style="border:1px dotted red;">
 
 ### Version 0.0.8
 Cross Browser and Parallel Testing.
@@ -214,6 +225,8 @@ Cross Browser and Parallel Testing.
 - check the console output to see the test cases running in parallel on different browsers.
 - check the logs to see the test case execution details.
 
-___
-___
+<br>
+<br>
+
+<hr style="border:1px dotted red;">
 
