@@ -3,10 +3,14 @@ package testBase;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
@@ -18,16 +22,44 @@ import java.time.Duration;
 public class BaseClass {
     // WebDriver instance for browser interaction
     public WebDriver driver;
+
+    // Logger instance for logging test execution details
     public Logger logger;
 
     /**
      * Setup method to initialize the WebDriver and configure browser settings.
      * This method runs before any test method in the class.
+     *
+     * @param os The operating system on which the tests are running.
+     * @param br The browser to be used for testing (e.g., chrome, firefox, edge).
      */
     @BeforeClass
-    public void setup() {
+    @Parameters({"os", "browser"})
+    public void setup(String os, String br) {
+
+        // Initialize logger for the current class
         logger = LogManager.getLogger(this.getClass());
-        driver = new ChromeDriver(); // Initialize ChromeDriver
+
+        // Select WebDriver based on the specified browser
+        switch (br) {
+            case "chrome":
+                driver = new ChromeDriver(); // Initialize ChromeDriver
+                break;
+            case "firefox":
+                driver = new FirefoxDriver(); // Initialize FirefoxDriver
+                break;
+            case "edge":
+                driver = new EdgeDriver(); // Initialize EdgeDriver
+                break;
+            case "safari":
+                driver = new SafariDriver(); // Initialize EdgeDriver
+                break;
+            default:
+                System.out.println("Browser not supported: " + br); // Handle unsupported browser
+                return; // Exit from the test case if browser is not supported
+        }
+
+        // Configure browser settings
         driver.manage().deleteAllCookies(); // Clear browser cookies
         driver.manage().window().maximize(); // Maximize browser window
         driver.get("http://localhost/opencart/upload/index.php"); // Navigate to the application URL
