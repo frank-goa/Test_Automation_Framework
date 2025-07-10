@@ -184,7 +184,7 @@ public void setup(String os, String br) {
 - we should now run the test case using only the master.xml file.
 
 
-_<br>
+<br>
 <br>
 
 <hr style="border:1px dotted red;">
@@ -230,3 +230,84 @@ Cross Browser and Parallel Testing.
 
 <hr style="border:1px dotted red;">
 
+### Version 0.0.9
+Reading common values from a properties file.
+- Create a new file named "config.properties" in the src/test/resources folder.
+- replace the hardcoded values in the BaseClass setup method (url, username, password).
+- add entries in the format of key-value pairs in the config.properties file.
+- Add the following properties to the config.properties file:
+
+```properties
+appURL=http://localhost/opencart/upload/index.php
+email=johndoe_1@gmail.com
+password=JohnDoe123
+searchProductName=iPhone
+```
+
+- Update the BaseClass setup method to read the properties file and use the values from it.
+
+```java
+public class BaseClass {
+
+    public WebDriver driver;
+    public Logger logger;
+    public Properties p;
+
+    @BeforeClass
+    @Parameters({"os", "browser"})
+    public void setup(String os, String br) throws IOException {
+
+        //FileReader file = new FileReader("./src/test/resources/config.properties");
+        FileInputStream file = new FileInputStream("./src/test/resources/config.properties");
+        p = new Properties();
+        p.load(file);
+
+        logger = LogManager.getLogger(this.getClass());
+
+        switch (br) {
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+            default:
+                System.out.println("Browser not supported: " + br);
+                return;
+        }
+
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+        driver.get(p.getProperty("appURL"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+
+    public String randomString() {
+        String generatedString = RandomStringUtils.randomAlphabetic(6);
+        return generatedString;
+    }
+
+    public String randonAlphanumericString() {
+        String generatedString = RandomStringUtils.randomAlphabetic(3);
+        String generatedNumber = RandomStringUtils.randomNumeric(3);
+        return (generatedString + "@" + generatedNumber);
+    }
+
+}
+```
+
+- Test the changes by running the test case again using master.xml file.
+
+
+<br>
+<br>
+
+<hr style="border:1px dotted red;">
