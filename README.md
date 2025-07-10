@@ -1,7 +1,7 @@
 # Test Automation Framework
 
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+___
+___
 
 - #### This is a test automation framework designed to facilitate the testing of web applications***OpenCart
   ***. It provides a structured approach to writing and executing tests, making it easier to maintain and scale your test suite.
@@ -11,19 +11,22 @@
 
 <img src="img.png" alt="Folder Structure" width="800"/>
 
--------------------------
+___
+___
 
 ### Version 0.0.1
 
 - A blank Java project with the necessary dependencies for Selenium and TestNG.
 
-------------------------
+___
+___
 
 ### Version 0.0.2
 
 - Update pom.xml to include the dependencies.
 
-------------------------
+___
+___
 
 ### Version 0.0.3
 
@@ -39,7 +42,10 @@
 - Create re-usable methods in BasePage to generate random email.
 
 <img src="folderstructure.jpg" alt="Folder Structure" width="400"/>
-------------------------
+
+___
+___
+
 
 ### Version 0.0.4
 
@@ -57,7 +63,9 @@ We create page objects for the following pages:
 - We have achieved reusability of code by creating a BasePage class.
 - Initialize web elements defined in the child classes using PageFactory
 
-------------------------
+___
+___
+
 
 ### Version 0.0.5
 - Modified TC_001_AccountRegistrationTest to use the BasePage class.
@@ -65,7 +73,9 @@ We create page objects for the following pages:
 - Added a method to generate random alphaNumeric string as email in BasePage.
 - Ran the test case and verified the account registration functionality.
 
-------------------------
+___
+___
+
 
 ### Version 0.0.6
 - Adding logging functionality to the framework.
@@ -102,14 +112,15 @@ public class BaseClass {
 }
 ```
 
----------------------------
+___
+
 
 ### Version 0.0.7
 
 Running Test Cases on different browsers
 - create a xml file by right clicking on the testCases package and selecting Create TestNG XML.
 - Add the following code to the xml file passing parameters for browser and os.
-- Save this file as "master.xml" in the testCases package.
+- Save this file as "master.xml" in the project folder (project level).
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -123,11 +134,14 @@ Running Test Cases on different browsers
     </classes>
   </test>
 </suite>
-
 ```
+
+
 - Update the BaseClass setup method to read the parameters from the xml file.
   - add @Parameters annotation to the setup method => @Parameters({"os", "browser"})
   - update the setup method to accept 2 parameters os and browser => public void setup(String os, String browser)
+
+
 ```java
 @BeforeClass
 @Parameters({"os", "browser"})
@@ -158,4 +172,48 @@ public void setup(String os, String br) {
 ```
 
 - we should now run the test case using only the master.xml file.
+
+
+___
+___
+
+
+### Version 0.0.8
+Cross Browser and Parallel Testing.
+- create a copy of the master.xml file and name it as "crossbrowsertesting.xml".
+- Update the crossbrowsertesting.xml file to include the following code:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="3" name="Suite">
+    <test name="chrometest">
+        <parameter name="os" value="mac" />
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="testCases.TC001_AccountRegistrationTest"/>
+        </classes>
+    </test>
+    <test name="edgetest">
+        <parameter name="os" value="mac" />
+        <parameter name="browser" value="edge" />
+        <classes>
+            <class name="testCases.TC001_AccountRegistrationTest"/>
+        </classes>
+    </test>
+    <test name="firefoxtest">
+        <parameter name="os" value="mac" />
+        <parameter name="browser" value="firefox" />
+        <classes>
+            <class name="testCases.TC001_AccountRegistrationTest"/>
+        </classes>
+    </test>
+</suite>
+```
+- run the test case using the crossbrowsertesting.xml file.
+- check the console output to see the test cases running in parallel on different browsers.
+- check the logs to see the test case execution details.
+
+___
+___
 
