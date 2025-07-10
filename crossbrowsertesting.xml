@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!--
+    TestNG suite configuration file for cross-browser testing.
+    This file defines tests for different browsers (Chrome, Edge, Firefox) on macOS.
+    Each test specifies parameters for the operating system and browser type.
+    The tests execute the `TC001_AccountRegistrationTest` class.
+-->
+<suite thread-count="3" name="Suite">
+    <!-- Test configuration for Chrome browser -->
+    <test name="chrometest">
+        <!-- Parameter specifying the operating system -->
+        <parameter name="os" value="mac" />
+        <!-- Parameter specifying the browser type -->
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <!-- Class to be executed for this test -->
+            <class name="testCases.TC001_AccountRegistrationTest"/>
+        </classes>
+    </test>
+
+    <!-- Test configuration for Edge browser -->
+    <test name="edgetest">
+        <!-- Parameter specifying the operating system -->
+        <parameter name="os" value="mac" />
+        <!-- Parameter specifying the browser type -->
+        <parameter name="browser" value="edge" />
+        <classes>
+            <!-- Class to be executed for this test -->
+            <class name="testCases.TC001_AccountRegistrationTest"/>
+        </classes>
+    </test>
+
+    <!-- Test configuration for Firefox browser -->
+    <test name="firefoxtest">
+        <!-- Parameter specifying the operating system -->
+        <parameter name="os" value="mac" />
+        <!-- Parameter specifying the browser type -->
+        <parameter name="browser" value="firefox" />
+        <classes>
+            <!-- Class to be executed for this test -->
+            <class name="testCases.TC001_AccountRegistrationTest"/>
+        </classes>
+    </test>
+</suite>
