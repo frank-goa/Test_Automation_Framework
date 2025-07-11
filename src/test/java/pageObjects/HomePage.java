@@ -27,6 +27,11 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[normalize-space()='Register']")
     WebElement lnkRegister;
 
+    // Web element representing the "Login" link under the "My Account" section
+    @FindBy(xpath = "//a[normalize-space()='Login']")
+    WebElement lnkLogin;
+
+
     /**
      * Clicks on the "My Account" link.
      */
@@ -39,5 +44,12 @@ public class HomePage extends BasePage {
      */
     public void clickOnRegister() {
         lnkRegister.click();
+    }
+
+    /**
+     * Clicks on the "Login" link under the "My Account" section.
+     */
+    public void clickOnLogin() {
+        lnkLogin.click();
     }
 }
