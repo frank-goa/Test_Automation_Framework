@@ -1,6 +1,8 @@
 package testBase;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -12,11 +14,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Parameters;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -105,5 +106,35 @@ public class BaseClass {
         String generatedString = RandomStringUtils.randomAlphabetic(3); // Generate random alphabetic string
         String generatedNumber = RandomStringUtils.randomNumeric(3); // Generate random numeric string
         return (generatedString + "@" + generatedNumber); // Combine alphabetic and numeric strings
+    }
+
+    public String captureScreen(String tname) throws IOException {
+
+        String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+
+        /*
+        ====> TakesScreenshot takesScreenshot = (TakesScreenshot) driver; <======
+        is used to enable the functionality of capturing screenshots in Selenium WebDriver. In Selenium,
+        the TakesScreenshot interface provides a method to capture a screenshot of the current browser window.
+        Here, the driver object, which is an instance of WebDriver, is cast to the TakesScreenshot interface.
+        This casting is necessary because not all WebDriver implementations inherently support the
+        TakesScreenshot interface. For example, browsers like Chrome and Firefox (via their respective drivers)
+        implement this interface, allowing screenshots to be taken.
+        By casting the driver to TakesScreenshot, you gain access to the getScreenshotAs method,
+        which can be used to capture the screenshot and save it in a specified format (e.g., as a file ).
+        This is particularly useful for debugging or reporting purposes in automated tests.
+         */
+
+        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+        File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
+
+        String targetFilePath=System.getProperty("user.dir")+"/screenshots/" + tname + "_" + timeStamp + ".png";
+        File targetFile=new File(targetFilePath);
+
+        //move the screenshot from its temporary location (sourceFile) to the specified target location (targetFile)
+        sourceFile.renameTo(targetFile);
+
+        return targetFilePath;
+
     }
 }

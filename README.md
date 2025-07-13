@@ -347,8 +347,8 @@ Creating a Login Test Case
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
     <test thread-count="3" name="Test">
-        <parameter name="os" value="mac" />
-        <parameter name="browser" value="chrome" />
+        <parameter name="os" value="mac"/>
+        <parameter name="browser" value="chrome"/>
         <classes>
             <!--<class name="testCases.TC001_AccountRegistrationTest"/>-->
             <class name="testCases.TC002_LoginTest"/>
@@ -367,19 +367,21 @@ Creating a Login Test Case
 <hr style="border:1px dotted red;">
 
 ### Version 0.0.11
+
 Create Data driven login test:
+
 - Prepare test data in Excel, place the excel file inside testData folder
 - create ExcelUtility class under utilities package
-  - to use this class, we need to add the Apache POI dependency in pom.xml file.
-  - you need to create an object of ExcelUtility class and call the methods to read data from the excel file.
-  - the ExcelUtility class will have methods to read data from the excel file.
-  - the methods will return the data in the form of a 2D array.
+    - to use this class, we need to add the Apache POI dependency in pom.xml file.
+    - you need to create an object of ExcelUtility class and call the methods to read data from the excel file.
+    - the ExcelUtility class will have methods to read data from the excel file.
+    - the methods will return the data in the form of a 2D array.
 - update BaseClass to initialize ExcelUtility class
-- update page object class MyAccountPage 
-  - add logout link element (this will be used to logout after login)
-  - add a method to perform logout action
-  - add a method to verify if the user is logged in by checking if the logout link is displayed.
-  - add a method to verify if the user is logged in by checking if the My Account heading is displayed.
+- update page object class MyAccountPage
+    - add logout link element (this will be used to logout after login)
+    - add a method to perform logout action
+    - add a method to verify if the user is logged in by checking if the logout link is displayed.
+    - add a method to verify if the user is logged in by checking if the My Account heading is displayed.
 - create DataProvider class in utility package to maintain data providers for data driven tests.
 - create LoginDataDrivenTest under testCases package
 - add an entry in testng.xml file
@@ -390,15 +392,53 @@ Create Data driven login test:
 <hr style="border:1px dotted red;">
 
 ### Version 0.0.12
+
 Grouping test cases in TestNG
+
 - Add groups tag to the test cases in the test classes
-  - LoginTest - sanity, master
-  - AccountRegistrationTest - regression, master
-  - LoginDDT - dataDriven
+    - LoginTest - sanity, master
+    - AccountRegistrationTest - regression, master
+    - LoginDDT - dataDriven
 - Add groups tag to the setup and teardown methods in BaseClass
 - Create a new xml file named "grouping.xml".
 - You can use tags like <include> and <exclude> to include or exclude specific groups of tests.
 - Run the test cases using the grouping.xml file.
+
+<br>
+<br>
+
+<hr style="border:1px dotted red;">
+
+### Version 0.0.13
+
+Adding Extent Reports to the framework
+- Add the Extent Reports dependency in pom.xml file.
+- Create a new class named "ExtentReportManager" under the utilities package.
+- Add captureScreenShot method in Base class.
+- Update the BaseClass to initialize ExtentReports and ExtentTest objects.
+- Update the xml files to include the ExtentReports listener.
+- Run the test cases using the master.xml file.
+- The ExtentReports will generate a report in the "reports" folder.
+- Write the code in onFinish method that opens the report in the browser after the test execution is complete.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <listeners>
+        <listener class-name="utilities.ExtentReportManager"/>
+    </listeners>
+    <test thread-count="3" name="Test">
+        <parameter name="os" value="mac"/>
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="testCases.TC001_AccountRegistrationTest"/>
+            <class name="testCases.TC002_LoginTest"/>
+            <!--<class name="testCases.TC003_LoginDDT"/>-->
+        </classes>
+    </test>
+</suite>
+```
 
 <br>
 <br>
