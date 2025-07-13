@@ -5,6 +5,8 @@
 
 # Log file
 *.log
+log/*
+logs/*
 
 # BlueJ files
 *.ctxt
@@ -40,9 +42,7 @@ replay_pid*
 # MacOS
 .DS_Store
 
-# Logs
-*.log
-/logs/
+
 
 # Test output
 /test-output/
