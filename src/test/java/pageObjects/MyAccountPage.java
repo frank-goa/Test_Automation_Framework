@@ -26,6 +26,9 @@ public class MyAccountPage extends BasePage {
     @FindBy(xpath = "//h1[normalize-space()='My Account']")
     WebElement lblMyAccount;
 
+    @FindBy(xpath = "//a[@class='list-group-item'][normalize-space()='Logout']")
+    WebElement lnkLogout;
+
     /**
      * Method to verify if the "My Account" page is displayed.
      * Checks the visibility of the "My Account" label on the page.
@@ -39,6 +42,19 @@ public class MyAccountPage extends BasePage {
             // Log and fail the test if the "My Account" page is not displayed
             Assert.fail("My Account page is not displayed: " + e.getMessage());
             return false; // This line will never be reached, but it's required for compilation
+        }
+    }
+
+    /**
+     * Method to click the "Logout" link on the "My Account" page.
+     * This method is used to log out the user from their account.
+     */
+    public void clickLogout() {
+        try {
+            lnkLogout.click(); // Click the "Logout" link
+        } catch (Exception e) {
+            // Log and fail the test if the "Logout" link cannot be clicked
+            Assert.fail("Unable to click Logout link: " + e.getMessage());
         }
     }
 }
