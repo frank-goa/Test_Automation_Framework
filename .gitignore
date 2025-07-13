@@ -53,6 +53,7 @@ replay_pid*
 /extent-reports/
 /extent.html
 /extent-config.xml
+/reports/*
 
 # Selenium screenshots
 /screenshots/
