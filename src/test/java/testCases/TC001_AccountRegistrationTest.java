@@ -17,7 +17,7 @@ public class TC001_AccountRegistrationTest extends BaseClass {
      * It performs actions on the HomePage and AccountRegistrationPage to register a new account.
      * Asserts the confirmation message to validate successful registration.
      */
-    @Test
+    @Test (groups = {"regression", "master"}) // TestNG annotation to define the test groups
     public void verifyAccountRegistration() {
 
         logger.info("**** Starting TC001_AccountRegistrationTest... ****"); // Log the start of the test case

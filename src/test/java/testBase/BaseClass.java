@@ -40,7 +40,7 @@ public class BaseClass {
      * @param os The operating system on which the tests are running.
      * @param br The browser to be used for testing (e.g., chrome, firefox, edge).
      */
-    @BeforeClass
+    @BeforeClass(groups = {"sanity", "regression", "master"})
     @Parameters({"os", "browser"})
     public void setup(String os, String br) throws IOException {
 
@@ -81,7 +81,7 @@ public class BaseClass {
      * Tear down method to close the browser after test execution.
      * This method runs after all test methods in the class.
      */
-    @AfterClass
+    @AfterClass(groups = {"sanity", "regression", "master"})
     public void tearDown() {
         driver.quit(); // Close the browser and end WebDriver session
     }

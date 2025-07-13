@@ -383,3 +383,24 @@ Create Data driven login test:
 - create DataProvider class in utility package to maintain data providers for data driven tests.
 - create LoginDataDrivenTest under testCases package
 - add an entry in testng.xml file
+
+<br>
+<br>
+
+<hr style="border:1px dotted red;">
+
+### Version 0.0.12
+Grouping test cases in TestNG
+- Add groups tag to the test cases in the test classes
+  - LoginTest - sanity, master
+  - AccountRegistrationTest - regression, master
+  - LoginDDT - dataDriven
+- Add groups tag to the setup and teardown methods in BaseClass
+- Create a new xml file named "grouping.xml".
+- You can use tags like <include> and <exclude> to include or exclude specific groups of tests.
+- Run the test cases using the grouping.xml file.
+
+<br>
+<br>
+
+<hr style="border:1px dotted red;">

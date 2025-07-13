@@ -21,7 +21,7 @@ public class TC002_LoginTest extends BaseClass {
      * 3. Enters login credentials and submits the form.
      * 4. Validates whether the "My Account" page is displayed after login.
      */
-    @Test
+    @Test (groups = {"sanity", "master"}) // TestNG annotation to define the test group
     public void verifyLogin() {
 
         // Log the start of the test case
