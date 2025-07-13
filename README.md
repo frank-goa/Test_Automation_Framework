@@ -365,3 +365,21 @@ Creating a Login Test Case
 <br>
 
 <hr style="border:1px dotted red;">
+
+### Version 0.0.11
+Create Data driven login test:
+- Prepare test data in Excel, place the excel file inside testData folder
+- create ExcelUtility class under utilities package
+  - to use this class, we need to add the Apache POI dependency in pom.xml file.
+  - you need to create an object of ExcelUtility class and call the methods to read data from the excel file.
+  - the ExcelUtility class will have methods to read data from the excel file.
+  - the methods will return the data in the form of a 2D array.
+- update BaseClass to initialize ExcelUtility class
+- update page object class MyAccountPage 
+  - add logout link element (this will be used to logout after login)
+  - add a method to perform logout action
+  - add a method to verify if the user is logged in by checking if the logout link is displayed.
+  - add a method to verify if the user is logged in by checking if the My Account heading is displayed.
+- create DataProvider class in utility package to maintain data providers for data driven tests.
+- create LoginDataDrivenTest under testCases package
+- add an entry in testng.xml file
