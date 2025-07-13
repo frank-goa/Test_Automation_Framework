@@ -42,6 +42,7 @@ replay_pid*
 
 # Logs
 *.log
+/logs/
 
 # Test output
 /test-output/
