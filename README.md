@@ -444,3 +444,8 @@ Adding Extent Reports to the framework
 <br>
 
 <hr style="border:1px dotted red;">
+
+### Version 0.1.0
+
+
+
