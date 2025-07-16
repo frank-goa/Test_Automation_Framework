@@ -447,5 +447,7 @@ Adding Extent Reports to the framework
 
 ### Version 0.1.0
 
+- Testing GitHub Actions
+
 
 
