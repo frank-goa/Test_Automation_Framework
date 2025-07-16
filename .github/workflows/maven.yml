@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,5 +20,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build with Maven
+      - name: Build and test with Maven
         run: mvn -B clean test
+
+      - name: Generate Surefire HTML report
+        run: mvn -B surefire-report:report
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test-Report
+          path: target/site/surefire-report.html
