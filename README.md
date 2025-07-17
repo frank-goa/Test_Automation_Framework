@@ -449,9 +449,9 @@ Adding Extent Reports to the framework
 
 Running tests on Selenium Grid
 
-Update the BaseClass setup method to run tests on Selenium Grid.
-Run the Selenium Grid hub on your local machine.
-Test the changes by running the test case again using master.xml file.
+- Update the BaseClass setup method to run tests on Selenium Grid.
+- Run the Selenium Grid hub on your local machine.
+- Test the changes by running the test case again using master.xml file.
 
 
 <br>
