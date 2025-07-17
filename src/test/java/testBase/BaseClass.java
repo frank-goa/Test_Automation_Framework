@@ -2,11 +2,14 @@ package testBase;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Parameters;
 
 import java.io.*;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -52,24 +56,69 @@ public class BaseClass {
         // Initialize logger for the current class
         logger = LogManager.getLogger(this.getClass());
 
-        // Select WebDriver based on the specified browser
-        switch (br) {
-            case "chrome":
-                driver = new ChromeDriver(); // Initialize ChromeDriver
-                break;
-            case "firefox":
-                driver = new FirefoxDriver(); // Initialize FirefoxDriver
-                break;
-            case "edge":
-                driver = new EdgeDriver(); // Initialize EdgeDriver
-                break;
-            case "safari":
-                driver = new SafariDriver(); // Initialize EdgeDriver
-                break;
-            default:
-                System.out.println("Browser not supported: " + br); // Handle unsupported browser
-                return; // Exit from the test case if browser is not supported
+        if (p.getProperty("execution_env").equalsIgnoreCase("remote")){
+            //grid setup
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+
+            //OS
+            if(os.equalsIgnoreCase("windows")){
+                capabilities.setPlatform(Platform.WINDOWS); // Set platform to Windows
+            } else if (os.equalsIgnoreCase("mac")){
+                capabilities.setPlatform(Platform.MAC); // Set platform to Mac
+            } else if (os.equalsIgnoreCase("linux")){
+                capabilities.setPlatform(Platform.LINUX); // Set platform to Linux
+            } else {
+                System.out.println("OS not supported: " + os); // Handle unsupported OS
+                return; // Exit from the test case if OS is not supported
+            }
+
+
+            // Browser
+            switch (br.toLowerCase()){
+                case "chrome":
+                    capabilities.setBrowserName("chrome"); // Set browser to Chrome
+                    break;
+                case "firefox":
+                    capabilities.setBrowserName("firefox"); // Set browser to Firefox
+                    break;
+                case "edge":
+                    capabilities.setBrowserName("edge"); // Set browser to Edge
+                    break;
+                case "safari":
+                    capabilities.setBrowserName("safari"); // Set browser to Safari
+                    break;
+                default:
+                    System.out.println("Browser not supported: " + br); // Handle unsupported browser
+                    return; // Exit from the test case if browser is not supported
+            }
+
+            // Initialize WebDriver for remote execution
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+
         }
+
+
+        if( p.getProperty("execution_env").equalsIgnoreCase("local")) {
+
+            switch (br) {
+                case "chrome":
+                    driver = new ChromeDriver(); // Initialize ChromeDriver
+                    break;
+                case "firefox":
+                    driver = new FirefoxDriver(); // Initialize FirefoxDriver
+                    break;
+                case "edge":
+                    driver = new EdgeDriver(); // Initialize EdgeDriver
+                    break;
+                case "safari":
+                    driver = new SafariDriver(); // Initialize EdgeDriver
+                    break;
+                default:
+                    System.out.println("Browser not supported: " + br); // Handle unsupported browser
+                    return; // Exit from the test case if browser is not supported
+            }
+        }
+
 
         // Configure browser settings
         driver.manage().deleteAllCookies(); // Clear browser cookies
