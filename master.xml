@@ -5,10 +5,10 @@
         <listener class-name="utilities.ExtentReportManager"/>
     </listeners>
     <test thread-count="3" name="Test">
-        <parameter name="os" value="mac" />
-        <parameter name="browser" value="firefox" />
+        <parameter name="os" value="mac"/>
+        <parameter name="browser" value="firefox"/>
         <classes>
-           <!-- <class name="testCases.TC001_AccountRegistrationTest"/>-->
+            <class name="testCases.TC001_AccountRegistrationTest"/>
             <class name="testCases.TC002_LoginTest"/>
             <!--<class name="testCases.TC003_LoginDDT"/>-->
         </classes>
